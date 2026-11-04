@@ -46,6 +46,8 @@ formulario-restaurante/
 │   └── styles.css              Diseño, colores y versión para celular (CSS3)
 ├── js/
 │   └── script.js               Validaciones y ventana de confirmación (JavaScript)
+├── img/
+│   └── logo-ing-carlos.webp    Logo de los créditos del pie de página
 ├── iniciar.bat                 Abre el proyecto en el navegador con un servidor local
 ├── ejecutar_pruebas.bat        Ejecuta las pruebas automáticas y genera el PDF
 ├── pruebas/
@@ -94,6 +96,7 @@ abriéndolo directamente en Chrome, Edge o Firefox.
 - El tipo de reserva son 4 botones de opción (`radio`) con forma de tarjeta.
 - El formulario lleva `novalidate`, así los mensajes los controla el JavaScript y no el navegador.
 - La ventana de confirmación empieza oculta (`hidden`).
+- Debajo de la tarjeta, el `<footer class="creditos">` muestra el logo y "Hecho por el Ing. Carlos".
 
 ### `css/styles.css` — el diseño
 

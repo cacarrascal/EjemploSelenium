@@ -24,6 +24,7 @@
   --error: #b3261e;
   --error-fondo: #fdf0ee;
   --exito: #2e7d4f;
+  --rojo-logo: #ff3b3b;     /* rojo del logo del Ing. Carlos (créditos) */
 
   --fuente-titulos: Georgia, "Times New Roman", serif;
   --fuente-texto: "Segoe UI", Roboto, Arial, sans-serif;
@@ -48,8 +49,11 @@
   display: none !important;
 }
 
+/* El body es una columna: arriba el formulario y abajo los créditos */
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: var(--fuente-texto);
   color: var(--texto);
   /* Fondo degradado de café oscuro a negro */
@@ -67,7 +71,7 @@ body.sin-scroll {
    3. CONTENEDOR Y TARJETA (centrado en pantalla)
    --------------------------------------------------------- */
 .contenedor {
-  min-height: 100vh;
+  flex: 1;                   /* ocupa todo el alto que dejan los créditos */
   display: flex;
   align-items: center;       /* centra verticalmente */
   justify-content: center;   /* centra horizontalmente */
@@ -434,6 +438,38 @@ input::-webkit-calendar-picker-indicator {
   letter-spacing: 0.5px;
   color: var(--dorado);
   background: var(--cafe-oscuro);
+}
+
+
+/* ---------------------------------------------------------
+   10.1 CRÉDITOS (pie de la página, debajo de la tarjeta)
+   --------------------------------------------------------- */
+.creditos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 16px 26px;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: var(--beige);
+}
+
+.creditos-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  /* Brillo rojo suave, igual al neón del logo */
+  box-shadow: 0 0 14px rgba(255, 40, 40, 0.45);
+  transition: transform 0.2s;
+}
+
+.creditos-logo:hover {
+  transform: scale(1.08);
+}
+
+.creditos strong {
+  color: var(--rojo-logo);
 }
 
 
