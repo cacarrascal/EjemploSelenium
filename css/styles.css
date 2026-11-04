@@ -1,0 +1,586 @@
+/* =========================================================
+   styles.css — Estilos del formulario de reservas
+   Restaurante El Fogón Dorado
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. VARIABLES
+   Si cambias un color aquí, cambia en todo el diseño.
+   --------------------------------------------------------- */
+:root {
+  --cafe-oscuro: #3b2418;
+  --cafe: #6f4e37;
+  --cafe-claro: #a47551;
+  --dorado: #c8a27a;
+  --beige: #f3e9dc;
+  --beige-borde: #dccab5;
+  --crema: #fbf7f2;
+  --blanco: #ffffff;
+  --negro: #1c1410;
+
+  --texto: #2b201a;
+  --texto-suave: #7a6a5d;
+  --error: #b3261e;
+  --error-fondo: #fdf0ee;
+  --exito: #2e7d4f;
+
+  --fuente-titulos: Georgia, "Times New Roman", serif;
+  --fuente-texto: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+
+/* ---------------------------------------------------------
+   2. AJUSTES GENERALES
+   --------------------------------------------------------- */
+
+/* box-sizing: el ancho incluye el padding y el borde (más fácil de calcular) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* El atributo "hidden" siempre debe ocultar, aunque el elemento tenga display propio */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--fuente-texto);
+  color: var(--texto);
+  /* Fondo degradado de café oscuro a negro */
+  background: radial-gradient(circle at top, #5a3a28 0%, var(--cafe-oscuro) 40%, var(--negro) 100%);
+  background-attachment: fixed;
+}
+
+/* Evita que la página se desplace mientras la ventana de confirmación está abierta */
+body.sin-scroll {
+  overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   3. CONTENEDOR Y TARJETA (centrado en pantalla)
+   --------------------------------------------------------- */
+.contenedor {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;       /* centra verticalmente */
+  justify-content: center;   /* centra horizontalmente */
+  padding: 40px 16px;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 760px;
+  border-radius: 20px;
+  overflow: hidden;          /* recorta las esquinas del encabezado y el pie */
+  background: var(--crema);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+
+/* ---------------------------------------------------------
+   4. ENCABEZADO
+   --------------------------------------------------------- */
+.encabezado {
+  text-align: center;
+  padding: 36px 24px 30px;
+  color: var(--beige);
+  background: linear-gradient(135deg, var(--cafe-oscuro), var(--cafe));
+  border-bottom: 4px solid var(--dorado);
+}
+
+.logo {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border: 2px solid var(--dorado);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.restaurante {
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dorado);
+  margin-bottom: 6px;
+}
+
+.encabezado h1 {
+  font-family: var(--fuente-titulos);
+  font-size: 2.3rem;
+  font-weight: normal;
+}
+
+.subtitulo {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+
+/* ---------------------------------------------------------
+   5. FORMULARIO Y SECCIONES
+   --------------------------------------------------------- */
+.formulario {
+  padding: 32px 36px 28px;
+}
+
+/* Aviso general de errores */
+.aviso-errores {
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--error);
+  background: var(--error-fondo);
+  border-left: 4px solid var(--error);
+  border-radius: 8px;
+}
+
+/* Cada bloque del formulario (datos personales / datos de la reserva) */
+.seccion {
+  border: none;
+  margin-bottom: 30px;
+}
+
+.seccion legend {
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+  color: var(--cafe-oscuro);
+  border-bottom: 1px solid var(--beige-borde);
+}
+
+/* Círculo con el número de la sección */
+.numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  vertical-align: middle;
+  font-family: var(--fuente-texto);
+  font-size: 0.85rem;
+  color: var(--beige);
+  background: var(--cafe);
+  border-radius: 50%;
+}
+
+/* Cuadrícula de 2 columnas para los campos */
+.campos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 22px;
+}
+
+/* Un "grupo" = etiqueta + campo + mensajes */
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Este grupo ocupa las dos columnas */
+.grupo--completo {
+  grid-column: 1 / -1;
+}
+
+
+/* ---------------------------------------------------------
+   6. ETIQUETAS Y CAMPOS
+   --------------------------------------------------------- */
+label,
+.etiqueta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cafe-oscuro);
+}
+
+.obligatorio {
+  color: var(--error);
+}
+
+.opcional {
+  font-weight: normal;
+  color: var(--texto-suave);
+}
+
+input,
+textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 1rem;          /* 16px evita el zoom automático en iPhone */
+  color: var(--texto);
+  background: var(--blanco);
+  border: 1.5px solid var(--beige-borde);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #b3a394;
+}
+
+/* Cuando el usuario está escribiendo en el campo */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--cafe);
+  box-shadow: 0 0 0 4px rgba(111, 78, 55, 0.15);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;         /* solo se puede agrandar hacia abajo */
+}
+
+/* Ícono del calendario y del reloj */
+input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+/* Textos de ayuda, contador y errores */
+.ayuda,
+.contador {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+}
+
+.contador {
+  text-align: right;
+}
+
+.error {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--error);
+}
+
+/* Si el mensaje de error está vacío, no ocupa espacio */
+.error:empty {
+  display: none;
+}
+
+
+/* ---------------------------------------------------------
+   7. ESTADOS DE VALIDACIÓN (clases que agrega script.js)
+   --------------------------------------------------------- */
+.grupo.invalido input,
+.grupo.invalido textarea {
+  border-color: var(--error);
+  background: var(--error-fondo);
+}
+
+.grupo.invalido input:focus {
+  box-shadow: 0 0 0 4px rgba(179, 38, 30, 0.15);
+}
+
+.grupo.valido input {
+  border-color: var(--exito);
+}
+
+
+/* ---------------------------------------------------------
+   8. TIPO DE RESERVA (radios con forma de tarjeta)
+   --------------------------------------------------------- */
+.opciones-tipo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.opcion {
+  position: relative;
+  cursor: pointer;
+}
+
+/* El círculo del radio se oculta visualmente, pero sigue funcionando
+   con el teclado y los lectores de pantalla */
+.opcion input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+}
+
+.opcion-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--cafe-oscuro);
+  background: var(--blanco);
+  border: 1.5px solid var(--beige-borde);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.opcion-icono {
+  font-size: 1.7rem;
+}
+
+.opcion:hover .opcion-contenido {
+  border-color: var(--cafe-claro);
+  transform: translateY(-2px);
+}
+
+/* Opción seleccionada: el "+" significa "el elemento que va justo después" */
+.opcion input:checked + .opcion-contenido {
+  color: var(--beige);
+  background: var(--cafe);
+  border-color: var(--cafe);
+  box-shadow: 0 8px 18px rgba(59, 36, 24, 0.25);
+}
+
+/* Borde visible cuando se navega con el teclado (tecla Tab) */
+.opcion input:focus-visible + .opcion-contenido {
+  outline: 3px solid var(--dorado);
+  outline-offset: 2px;
+}
+
+.grupo.invalido .opcion-contenido {
+  border-color: var(--error);
+}
+
+
+/* ---------------------------------------------------------
+   9. BOTONES
+   --------------------------------------------------------- */
+.acciones {
+  display: flex;
+  gap: 12px;
+}
+
+.boton {
+  padding: 14px 28px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.boton:active {
+  transform: scale(0.98);
+}
+
+.boton:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 2px;
+}
+
+.boton--principal {
+  flex: 1;                  /* ocupa el espacio que sobra */
+  letter-spacing: 0.5px;
+  color: var(--beige);
+  background: var(--cafe-oscuro);
+}
+
+.boton--principal:hover {
+  background: var(--cafe);
+  box-shadow: 0 8px 20px rgba(59, 36, 24, 0.3);
+}
+
+.boton--secundario {
+  color: var(--cafe);
+  background: transparent;
+  border-color: var(--beige-borde);
+}
+
+.boton--secundario:hover {
+  background: var(--blanco);
+  border-color: var(--cafe);
+}
+
+.nota {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+
+/* ---------------------------------------------------------
+   10. PIE DE LA TARJETA
+   --------------------------------------------------------- */
+.pie {
+  padding: 14px 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: var(--dorado);
+  background: var(--cafe-oscuro);
+}
+
+
+/* ---------------------------------------------------------
+   11. VENTANA DE CONFIRMACIÓN (modal)
+   --------------------------------------------------------- */
+.modal {
+  position: fixed;
+  inset: 0;                 /* cubre toda la pantalla */
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(28, 20, 16, 0.75);
+  animation: aparecer 0.25s ease;
+}
+
+.modal-caja {
+  width: 100%;
+  max-width: 440px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 32px 28px 28px;
+  text-align: center;
+  background: var(--blanco);
+  border-top: 6px solid var(--dorado);
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  animation: subir 0.3s ease;
+}
+
+.modal-icono {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--blanco);
+  background: var(--exito);
+  border-radius: 50%;
+}
+
+.modal-caja h2 {
+  margin-bottom: 8px;
+  font-family: var(--fuente-titulos);
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: var(--cafe-oscuro);
+}
+
+.modal-mensaje {
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+}
+
+/* Lista con el resumen de la reserva */
+.resumen {
+  list-style: none;
+  margin: 18px 0 22px;
+  padding: 6px 18px;
+  text-align: left;
+  background: var(--beige);
+  border-radius: 12px;
+}
+
+.resumen li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  font-size: 0.92rem;
+  border-bottom: 1px dashed var(--beige-borde);
+}
+
+.resumen li:last-child {
+  border-bottom: none;
+}
+
+.resumen strong {
+  color: var(--cafe);
+  white-space: nowrap;
+}
+
+.resumen span {
+  text-align: right;
+  overflow-wrap: anywhere;  /* parte palabras muy largas para que no se salgan */
+}
+
+.modal-caja .boton {
+  width: 100%;
+}
+
+/* Animaciones */
+@keyframes aparecer {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+/* ---------------------------------------------------------
+   12. DISEÑO ADAPTABLE (RESPONSIVE)
+   Estas reglas solo se aplican en pantallas de 640px o menos
+   (celulares y tablets pequeñas).
+   --------------------------------------------------------- */
+@media (max-width: 640px) {
+  .contenedor {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .tarjeta {
+    border-radius: 0;       /* en celular la tarjeta ocupa toda la pantalla */
+  }
+
+  .encabezado h1 {
+    font-size: 1.8rem;
+  }
+
+  .formulario {
+    padding: 24px 18px 22px;
+  }
+
+  /* Los campos pasan de 2 columnas a 1 */
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  /* Las opciones de tipo de reserva pasan de 4 a 2 columnas */
+  .opciones-tipo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Botones uno debajo del otro, con "Confirmar" arriba */
+  .acciones {
+    flex-direction: column-reverse;
+  }
+
+  .boton {
+    width: 100%;
+  }
+}

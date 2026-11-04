@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hace que la página se adapte al ancho de celulares y tablets -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario de reservas del Restaurante El Fogón Dorado">
+  <title>Reservas | Restaurante El Fogón Dorado</title>
+
+  <!-- Hoja de estilos del proyecto (carpeta css) -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Contenedor principal: centra la tarjeta del formulario en la pantalla -->
+  <main class="contenedor">
+
+    <section class="tarjeta">
+
+      <!-- ================= ENCABEZADO ================= -->
+      <header class="encabezado">
+        <div class="logo" aria-hidden="true">🍽️</div>
+        <p class="restaurante">Restaurante El Fogón Dorado</p>
+        <h1>Reserva tu mesa</h1>
+        <p class="subtitulo">Completa tus datos y te esperamos con la mesa lista.</p>
+      </header>
+
+      <!-- ================= FORMULARIO ================= -->
+      <!-- "novalidate" desactiva los mensajes automáticos del navegador,
+           así las validaciones y los mensajes los controla script.js -->
+      <form id="formReserva" class="formulario" novalidate>
+
+        <!-- Aviso general: aparece solo cuando hay errores -->
+        <div id="avisoErrores" class="aviso-errores" role="alert" hidden>
+          Revisa los campos marcados en rojo antes de continuar.
+        </div>
+
+        <!-- ---------- SECCIÓN 1: DATOS PERSONALES ---------- -->
+        <fieldset class="seccion">
+          <legend><span class="numero">1</span> Datos personales</legend>
+
+          <div class="campos">
+
+            <!-- Nombre completo (ocupa las dos columnas) -->
+            <div class="grupo grupo--completo">
+              <label for="nombre">Nombre completo <span class="obligatorio">*</span></label>
+              <input type="text" id="nombre" name="nombre"
+                     placeholder="Ej: María Fernanda López" autocomplete="name">
+              <small class="error" id="error-nombre"></small>
+            </div>
+
+            <!-- Número de identificación -->
+            <div class="grupo">
+              <label for="identificacion">Número de identificación <span class="obligatorio">*</span></label>
+              <input type="text" id="identificacion" name="identificacion"
+                     inputmode="numeric" placeholder="Ej: 1098765432">
+              <small class="ayuda">Solo números, sin puntos.</small>
+              <small class="error" id="error-identificacion"></small>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="grupo">
+              <label for="telefono">Número de teléfono <span class="obligatorio">*</span></label>
+              <input type="tel" id="telefono" name="telefono"
+                     placeholder="Ej: 3001234567" autocomplete="tel">
+              <small class="ayuda">Celular o fijo de 10 dígitos.</small>
+              <small class="error" id="error-telefono"></small>
+            </div>
+
+            <!-- Correo electrónico -->
+            <div class="grupo">
+              <label for="correo">Correo electrónico <span class="obligatorio">*</span></label>
+              <input type="email" id="correo" name="correo"
+                     placeholder="Ej: nombre@correo.com" autocomplete="email">
+              <small class="error" id="error-correo"></small>
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div class="grupo">
+              <label for="fechaNacimiento">Fecha de nacimiento <span class="obligatorio">*</span></label>
+              <input type="date" id="fechaNacimiento" name="fechaNacimiento" autocomplete="bday">
+              <small class="error" id="error-fechaNacimiento"></small>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- ---------- SECCIÓN 2: DATOS DE LA RESERVA ---------- -->
+        <fieldset class="seccion">
+          <legend><span class="numero">2</span> Datos de la reserva</legend>
+
+          <div class="campos">
+
+            <!-- Fecha de la reserva -->
+            <div class="grupo">
+              <label for="fechaReserva">Fecha de reserva <span class="obligatorio">*</span></label>
+              <input type="date" id="fechaReserva" name="fechaReserva">
+              <small class="error" id="error-fechaReserva"></small>
+            </div>
+
+            <!-- Hora de la reserva -->
+            <div class="grupo">
+              <label for="hora">Hora de reserva <span class="obligatorio">*</span></label>
+              <input type="time" id="hora" name="hora" min="12:00" max="22:00">
+              <small class="ayuda">Horario: 12:00 m. a 10:00 p. m.</small>
+              <small class="error" id="error-hora"></small>
+            </div>
+
+            <!-- Cantidad de personas -->
+            <div class="grupo grupo--completo">
+              <label for="personas">Cantidad de personas <span class="obligatorio">*</span></label>
+              <input type="number" id="personas" name="personas"
+                     min="1" max="20" placeholder="Ej: 4">
+              <small class="ayuda">Máximo 20 personas por reserva.</small>
+              <small class="error" id="error-personas"></small>
+            </div>
+
+            <!-- Tipo de reserva: botones de opción (radio) con forma de tarjeta -->
+            <div class="grupo grupo--completo">
+              <span class="etiqueta" id="etiqueta-tipo">Tipo de reserva <span class="obligatorio">*</span></span>
+
+              <div class="opciones-tipo" id="tipo" role="radiogroup" aria-labelledby="etiqueta-tipo">
+                <label class="opcion">
+                  <input type="radio" name="tipo" value="familiar">
+                  <span class="opcion-contenido">
+                    <span class="opcion-icono" aria-hidden="true">👨‍👩‍👧</span>
+                    Familiar
+                  </span>
+                </label>
+
+                <label class="opcion">
+                  <input type="radio" name="tipo" value="pareja">
+                  <span class="opcion-contenido">
+                    <span class="opcion-icono" aria-hidden="true">💑</span>
+                    Pareja
+                  </span>
+                </label>
+
+                <label class="opcion">
+                  <input type="radio" name="tipo" value="amigos">
+                  <span class="opcion-contenido">
+                    <span class="opcion-icono" aria-hidden="true">🥂</span>
+                    Amigos
+                  </span>
+                </label>
+
+                <label class="opcion">
+                  <input type="radio" name="tipo" value="empresarial">
+                  <span class="opcion-contenido">
+                    <span class="opcion-icono" aria-hidden="true">💼</span>
+                    Empresarial
+                  </span>
+                </label>
+              </div>
+
+              <small class="error" id="error-tipo"></small>
+            </div>
+
+            <!-- Observaciones (opcional) -->
+            <div class="grupo grupo--completo">
+              <label for="observaciones">
+                Observaciones o solicitudes especiales <span class="opcional">(opcional)</span>
+              </label>
+              <textarea id="observaciones" name="observaciones" maxlength="250"
+                        placeholder="Ej: celebración de cumpleaños, silla para bebé, alergia a los mariscos..."></textarea>
+              <small class="contador" id="contador">0 / 250</small>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- ---------- BOTONES ---------- -->
+        <div class="acciones">
+          <button type="reset" class="boton boton--secundario">Limpiar</button>
+          <button type="submit" class="boton boton--principal">Confirmar reserva</button>
+        </div>
+
+        <p class="nota">Los campos marcados con <span class="obligatorio">*</span> son obligatorios.</p>
+      </form>
+
+      <!-- ================= PIE DE LA TARJETA ================= -->
+      <footer class="pie">
+        Atendemos todos los días de 12:00 m. a 10:00 p. m.
+      </footer>
+
+    </section>
+  </main>
+
+  <!-- ================= VENTANA DE CONFIRMACIÓN ================= -->
+  <!-- Está oculta ("hidden") y script.js la muestra cuando el registro es exitoso -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+      <div class="modal-icono" aria-hidden="true">✓</div>
+      <h2 id="modalTitulo">¡Reserva registrada!</h2>
+      <p id="modalMensaje" class="modal-mensaje"></p>
+
+      <!-- Aquí script.js escribe el resumen de la reserva -->
+      <ul id="resumen" class="resumen"></ul>
+
+      <button type="button" id="btnCerrarModal" class="boton boton--principal">Aceptar</button>
+    </div>
+  </div>
+
+  <!-- El script va al final para que el HTML ya esté cargado cuando se ejecute -->
+  <script src="js/script.js"></script>
+</body>
+</html>
